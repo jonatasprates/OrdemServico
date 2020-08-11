@@ -1,0 +1,9 @@
+<div id="logreg-forms">
+    <form [formGroup]="loginForm" class="form-signin">
+        <h4 class="mb-3 font-weight-normal text-center">Acesse sua conta</h4>
+        <input type="email" class="form-control" placeholder="E-mail" formControlName="email">
+        <input type="password" class="form-control mt-2" placeholder="Senha" formControlName="senha">
+        <button class="btn btn-success btn-block" type="submit" (click)="login()"><i class="fas fa-sign-in-alt"></i> Entrar</button>
+        <a href="#">Esqueceu a senha?</a>
+    </form>
+</div>    

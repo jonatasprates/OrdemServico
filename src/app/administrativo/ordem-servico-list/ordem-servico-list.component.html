@@ -1,0 +1,65 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-2">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Lista de Ordens de Serviço</li>
+    </ol>
+  </nav>
+
+  <h3>Lista de Ordens de Serviço</h3> <hr>
+
+  <div class="form-inline mb-3">
+    <input type="text" class="input-group col-sm-4 form-control" placeholder="Pesquisar...">
+    <a routerLink="/administrativo/ordens-servicos/add" class="btn btn-success ml-2"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</a>
+  </div>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Número da O.S.</th>
+        <th scope="col">Cliente</th>
+        <th scope="col">Telefone</th>
+        <th scope="col">Tipo do Serviço</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let ordem of ordemServicos">
+        <td>{{ordem.id | numeroOS}}</td>
+        <td *ngIf="ordem.cliente.tipoCliente === 0" >{{ordem.cliente.nome}}</td>
+        <td *ngIf="ordem.cliente.tipoCliente === 1" >{{ordem.cliente.razaoSocial}}</td>
+        <td [innerHTML]="getTelefonesCliente(ordem.cliente.telefones).join(', ')"></td>
+        <td [innerHTML]="getTipoServico(ordem).join(', ')"></td>
+        <td>{{getTotal(ordem) | currencyBrazil }}</td>
+        <td>  
+          <span class="badge badge-danger" *ngIf="ordem.statusServico ==='orcamento'"> Orçamento</span>
+          <span class="badge badge-primary" *ngIf="ordem.statusServico ==='aprovado'"> Aprovado</span>
+          <span class="badge badge-warning" *ngIf="ordem.statusServico ==='andamento'"> Andamento</span>
+          <span class="badge badge-secondary" *ngIf="ordem.statusServico ==='cancelado'"> Cancelado</span>
+          <span class="badge badge-success" *ngIf="ordem.statusServico ==='finalizado'"> Finalizado</span>
+        </td>
+        <td>
+            <a [routerLink]="['/administrativo/ordens-servicos/', ordem.id, 'visualizar']" class="btn btn-outline-secondary btn-sm ml-1" title="Visualizar"><i class="fa fa-search" aria-hidden="true"></i></a>
+            <a href="" class="btn btn-outline-secondary btn-sm ml-1" title="Editar"><i class="fa fa-edit" aria-hidden="true"></i></a>
+            <button (click)="openModal(template, ordem.id)" class="btn btn-outline-secondary btn-sm ml-1" title="Excluir"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Confirmação de Exclusão</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="sairModalConfirmacaoDeletar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <p><strong> Deseja realmente excluir esta Ordem de Serviço? </strong></p>
+      <div class="text-right mb-4">
+        <button class="btn btn-success ml-1" (click)="deletar()">Sim</button>
+        <button class="btn btn-primary ml-1" (click)="sairModalConfirmacaoDeletar()">Sair</button>
+      </div>
+    </div>
+  </ng-template>

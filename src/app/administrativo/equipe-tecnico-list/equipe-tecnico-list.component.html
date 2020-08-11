@@ -1,0 +1,57 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-2">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Lista de Técnicos</li>
+    </ol>
+  </nav>
+
+  <h3>Lista de Técnicos</h3> <hr>
+
+  <div class="form-inline mb-3">
+    <input type="text" class="input-group col-sm-4 form-control" placeholder="Pesquisar..." (input)="filtrarTecnicos($event.target.value)">
+    <a routerLink="/administrativo/tecnico/add" class="btn btn-success ml-2"><i class="fa fa-plus" aria-hidden="true"></i> Adicionar</a>
+  </div>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Email</th>
+        <th scope="col">Status</th>
+        <th scope="col">Telefone</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tecnico of tecnicoFiltrado">
+        <td> {{tecnico.nome}} </td>
+        <td> {{tecnico.email}} </td>
+        <td> <span class="badge"
+             [ngClass]="{' badge-success': tecnico.status === 'habilitado', 
+                         ' badge-danger': tecnico.status === 'desabilitado'}">
+                         {{tecnico.status | titlecase }}</span>
+        </td>
+        <td [innerHTML]="getTelefones(tecnico).join(', ')"></td>
+        <td>
+          <a [routerLink]="['/administrativo/tecnico/', tecnico.id, 'edit']" class="btn btn-outline-secondary btn-sm ml-1" title="Editar"><i class="fa fa-edit" aria-hidden="true"></i></a>
+          <button (click)="openModal(template, tecnico.id)" class="btn btn-outline-secondary btn-sm ml-1" title="Excluir"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Confirmação de Exclusão</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="sairModalConfirmacaoDeletar()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+    <p><strong> Deseja realmente excluir este Técnico? </strong></p>
+      <div class="text-right mb-4">
+        <button class="btn btn-success ml-1" (click)="deletar()">Sim</button>
+        <button class="btn btn-primary ml-1" (click)="sairModalConfirmacaoDeletar()">Sair</button>
+      </div>
+    </div>
+  </ng-template>

@@ -1,0 +1,86 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-2">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Nova Ordem de Serviço</li>
+    </ol>
+  </nav>
+
+  <h3>Nova Ordem de Serviço</h3> <hr>
+
+<form [formGroup]="ordemServicoForm">
+    <label for="email">Cliente:</label>
+    <div class="form-inline mb-3">
+        <input type="text" list="nomeListaCliente" class="input-group col-sm-8 form-control" (input)="buscarCliente($event)" placeholder="Procure um cliente">
+        <datalist id="nomeListaCliente">
+            <option *ngFor="let c of clientes" [value]="c.nome" >{{c.nome}}</option>
+          </datalist>
+        <a href="" class="btn btn-primary ml-2"><i class="fa fa-search" aria-hidden="true"></i> Pesquisar</a>
+    </div>
+
+      <hr>
+      <h5>Itens</h5>
+
+      <div formArrayName="itensOrdemServico">
+        <div *ngFor="let item of itensOrdemServico; let i=index">
+            <div [formGroupName]="i">
+                <div class="form-row">
+                    <div class="form-group col-sm-5">
+                        <label for="email">Descrição:</label>
+                        <input type="text" class="form-control" formControlName="descricao">
+                    </div>
+
+                    <div class="form-group col-sm-1">
+                        <label for="email">Qtde:</label>
+                        <input type="text" class="form-control" formControlName="quantidade">
+                    </div>
+
+                    <div class="form-group col-sm-2">
+                        <label for="exampleFormControlSelect1">Tipo Serviço:</label>
+                            <select class="form-control" formControlName="tipoServico">
+                                <option value="Dia">Dia</option>
+                                <option value="Hora">Hora</option>
+                                <option value="Mes">Mês</option>
+                            </select>
+                    </div>
+                    
+                    <div class="form-group col-sm-1">
+                        <label for="email">Unitário:</label>
+                        <input type="text" class="form-control" formControlName="valorUnitario">
+                    </div>
+
+                    <div class="form-group col-sm-2">
+                        <label for="email">Total:</label>
+                        <input type="text" class="form-control" formControlName="valorTotal" readonly>
+                    </div>
+
+                    <div class="form-group">
+                    <button type="button" (click)="adicionarItemOrdem()" *ngIf="i===0" [disabled]="ordemServicoForm.get('itensOrdemServico').invalid" class="btn btn-success ml-1" style="margin-top:31px;" title="Adicionar novo Item"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                    <button type="button" (click)="removerItemOrdem(i)" [disabled]="ordemServicoForm.get('itensOrdemServico').value.length===1" class="btn btn-danger ml-1" style="margin-top:31px;" title="Remover Item"><i class="fa fa-times" aria-hidden="true"></i></button>
+                    </div>
+                </div> 
+            </div>
+        </div> 
+      </div>    
+
+    <div class="form-row">
+        <label for="txt-descricao">Observações:</label>
+        <textarea class="form-control" rows="4" formControlName="observacao"></textarea>
+    </div>
+
+    <hr>
+
+    <div class="mt-4">
+        <div style="background: #f1f1f1; border: 1px solid #c3c3c3; padding-top: 10px; padding-bottom: 30px; padding-right: 20px;">
+            <p class="float-right"><strong class="mr-2">Valor Total: </strong> <strong>{{getTotal() | currencyBrazil}}</strong></p>
+        </div>
+    </div>
+
+    <div class="mt-5">
+        <div class="float-right mb-4">
+            <button class="btn btn-primary ml-1"><i class="fas fa-save"></i> Salvar</button>
+            <button class="btn btn-light ml-1" type="button" (click)="voltar()" ><i class="fas fa-share-square"></i> Sair</button>
+        </div>
+    </div>
+    
+</form>
+

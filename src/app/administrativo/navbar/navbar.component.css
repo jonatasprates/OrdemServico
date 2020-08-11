@@ -1,0 +1,13 @@
+#app-logo {
+    margin-top: 15px;
+    width: 160px;
+  }
+  
+  .nav-link {
+    display: block;
+    padding: 0.5rem 0rem;
+}
+
+  .bg-nav-total{
+  padding-bottom: 5px; min-height: 100px; padding-left:0px; padding-right:0px;
+  }

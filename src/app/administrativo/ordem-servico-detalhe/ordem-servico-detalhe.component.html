@@ -1,0 +1,127 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb mt-2">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Visualizar Ordem de Serviço</li>
+    </ol>
+  </nav>
+
+  <h3>Visualizar Ordem de Serviço</h3> <hr>
+
+  <div class="row">
+    <div class="col-md-9">
+        <p><i class="fa fa-file-alt" aria-hidden="true"></i> O.S. Nº {{ordemServico.id | numeroOS}}</p>
+        <p style="color:#dc3545;" *ngIf="ordemServico.statusServico === 'orcamento'"><i class="fa fa-hashtag" aria-hidden="true"></i> orçamento</p>
+        <p style="color:#007bff;" *ngIf="ordemServico.statusServico === 'aprovado'"><i class="fa fa-hashtag" aria-hidden="true"></i> aprovado</p>
+        <p style="color:#ffc107;" *ngIf="ordemServico.statusServico === 'andamento'"><i class="fa fa-hashtag" aria-hidden="true"></i> andamento</p>
+        <p style="color:#28a745;" *ngIf="ordemServico.statusServico === 'finalizado'"><i class="fa fa-hashtag" aria-hidden="true"></i> finalizado</p>
+        <p *ngIf="ordemServico.statusServico === 'cancelado'"><i class="fa fa-hashtag" aria-hidden="true"></i> cancelado</p>
+    </div>
+    <div class="col-md-3">
+        <p><i class="fa fa-user" aria-hidden="true"></i> {{ordemServico.usuario.nome}} </p>
+      </div>
+  </div>
+
+    <hr>
+
+    <div class="row">
+        <p><strong>Cliente</strong></p>
+    </div>
+    
+    <form [formGroup]="ordemServicoForm">
+        <div formGroupName="cliente">
+            <div class="form-row">
+                <div class="form-group col-sm-5" *ngIf="ordemServico?.cliente?.tipoCliente==0">
+                    <label for="email">Nome:</label>
+                    <input type="text" class="form-control" formControlName="nome" readonly>
+                </div>
+
+                <div class="form-group col-sm-5" *ngIf="ordemServico?.cliente?.tipoCliente==1">
+                    <label for="email">Razão Social:</label>
+                    <input type="text" class="form-control" formControlName="razaoSocial" readonly>
+                </div>
+    
+                <div class="form-group col-sm-5">
+                    <label for="email">E-mail:</label>
+                    <input type="text" class="form-control" formControlName="email" readonly>
+                </div>
+            </div>
+    
+            <div formArrayName="telefones">
+                <div *ngFor="let telefone of telefones; let i=index">
+                  <div [formGroupName]="i">
+                    <div class="form-row">
+                        <div class="form-group col-sm-3">
+                            <label for="email">Telefone:</label>
+                            <input type="text" class="form-control" formControlName="telefoneFormatado" readonly>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <p><strong>Itens</strong></p>
+        </div>
+
+        <div formArrayName="itensOrdemServico">
+            <div *ngFor="let item of itensOrdemServico; let i=index">
+                <div [formGroupName]="i">
+                    <div class="form-row">
+                        <div class="form-group col-sm-5">
+                            <label for="email">Descrição:</label>
+                            <input type="text" class="form-control" formControlName="descricao" readonly>
+                        </div>
+
+                        <div class="form-group col-sm-1">
+                            <label for="email">Qtde:</label>
+                            <input type="text" class="form-control" formControlName="quantidade" readonly>
+                        </div>
+
+                        <div class="form-group col-sm-2">
+                            <label for="exampleFormControlSelect1">Tipo Serviço:</label>
+                                <select class="form-control" formControlName="tipoServico" readonly>
+                                    <option value="Dia">Dia</option>
+                                    <option value="Hora">Hora</option>
+                                    <option value="Mes">Mês</option>
+                                </select>
+                        </div>
+                        
+                        <div class="form-group col-sm-2">
+                            <label for="email">Unitário:</label>
+                            <input type="text" class="form-control" formControlName="valorUnitario" readonly>
+                        </div>
+
+                        <div class="form-group col-sm-2">
+                            <label for="email">Total:</label>
+                            <input type="text" class="form-control" formControlName="valorTotal" readonly>
+                        </div>
+                    </div>      
+                </div>
+            </div>
+        </div>
+    
+        <div class="form-row">
+            <label for="txt-descricao">Observações:</label>
+            <textarea class="form-control" rows="4" formControlName="observacao" readonly></textarea>
+        </div>
+
+        <hr>
+
+        <div class="mt-4">
+            <div style="background: #f1f1f1; border: 1px solid #c3c3c3; padding-top: 10px; padding-bottom: 30px; padding-right: 20px;">
+                <p class="float-right"><strong class="mr-2">Valor Total: </strong> <strong>{{getTotal() | currencyBrazil}}</strong></p>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <div class="float-right mb-4">
+                <button class="btn btn-danger ml-1" *ngIf="ordemServico.statusServico === 'orcamento'"><i class="fas fa-save"></i> Aprovar</button>
+                <button class="btn btn-primary ml-1" *ngIf="ordemServico.statusServico === 'aprovado'"><i class="fas fa-save"></i> Iniciar</button> <!--Se iniciar escolher um técnio para iniciar O.S: Selecione a pessoa que irá executar o serviço-->
+                <button class="btn btn-warning ml-1" *ngIf="ordemServico.statusServico === 'andamento'"><i class="fas fa-save"></i> Finalizar</button> <!--adicionar tecnico na tela, mostrar botão cancelar, botão técnicos -->
+                <button class="btn btn-light ml-1" type="button" (click)="voltar()"><i class="fas fa-share-square"></i> Sair</button>
+            </div>
+        </div>
+    </form>

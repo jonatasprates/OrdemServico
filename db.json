@@ -1,0 +1,286 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "tipoCliente": 0,
+      "nome": "Henrique Silva",
+      "rg": "7839521477",
+      "razaoSocial": "",
+      "cnpj": "",
+      "telefones": [
+        {
+          "id": 1,
+          "ddd": "16",
+          "numero": "997322922"
+        }
+      ],
+      "email": "jonatas@gmail.com",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "bairro": "",
+        "numero": "",
+        "estado": "",
+        "cidade": "",
+        "complemento": ""
+      }
+    },
+    {
+      "id": 2,
+      "tipoCliente": 1,
+      "nome": "",
+      "rg": "",
+      "razaoSocial": "TIWS - Informatica",
+      "cnpj": "9875642132154",
+      "telefones": [
+        {
+          "id": 2,
+          "ddd": "16",
+          "numero": "981192842"
+        }
+      ],
+      "email": "jonatas@gmail.com",
+      "endereco": {
+        "cep": "",
+        "logradouro": "",
+        "bairro": "",
+        "numero": "",
+        "estado": "",
+        "cidade": "",
+        "complemento": ""
+      }
+    },
+    {
+      "tipoCliente": "0",
+      "nome": "Jonatas",
+      "rg": "483215",
+      "razaoSocial": "",
+      "cnpj": "",
+      "email": "jonatasluisprates@gmail.com",
+      "endereco": {
+        "cep": "14805-045",
+        "logradouro": "Avenida Dom Carlos Carmelo",
+        "bairro": "Jardim Botânico",
+        "numero": "156",
+        "localidade": "Araraquara",
+        "uf": "SP",
+        "complemento": "asdasd"
+      },
+      "telefones": [
+        {
+          "ddd": "16",
+          "numero": "33843129"
+        }
+      ],
+      "id": 3
+    },
+    {
+      "tipoCliente": "1",
+      "nome": "Gilvan",
+      "rg": "",
+      "razaoSocial": "saiodjasodl",
+      "cnpj": "49.846.546/5481-15",
+      "email": "admin@hotmail.com",
+      "endereco": {
+        "cep": "15996-038",
+        "logradouro": "Avenida Ângelo Ragassi",
+        "bairro": "Jardim São José",
+        "numero": "146",
+        "localidade": "Matão",
+        "uf": "SP",
+        "complemento": "1012"
+      },
+      "telefones": [
+        {
+          "ddd": "16",
+          "numero": "997322922"
+        },
+        {
+          "ddd": "16",
+          "numero": "33843129"
+        }
+      ],
+      "id": 4
+    }
+  ],
+  "tecnicos": [
+    {
+      "id": 1,
+      "nome": "Jonatas Prates",
+      "email": "jonatasluisprates@gmail.com",
+      "status": "habilitado",
+      "telefones": [
+        {
+          "id": 2,
+          "ddd": "16",
+          "numero": "981192842"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "nome": "Lucas Eduardo",
+      "email": "dudu@gmail.com",
+      "status": "desabilitado",
+      "telefones": [
+        {
+          "id": 2,
+          "ddd": "16",
+          "numero": "981192842"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "nome": "teste 2",
+      "email": "testew@gmail.com",
+      "status": "habilitado",
+      "telefones": [
+        {
+          "ddd": "16",
+          "numero": "997322922"
+        },
+        {
+          "ddd": "16",
+          "numero": "33843129"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "nome": "teste3",
+      "email": "teste@gmail.com",
+      "status": "desabilitado",
+      "telefones": [
+        {
+          "ddd": "19",
+          "numero": "997521355"
+        }
+      ]
+    }
+  ],
+  "ordemServico": [
+    {
+      "id": 1,
+      "clienteId": 1,
+      "usuarioId": 1,
+      "itensOrdemServico": [
+        {
+          "id": 1,
+          "descricao": "Adicionar HD SSD",
+          "quantidade": 1,
+          "tipoServico": "Dia",
+          "valorUnitario": 20,
+          "valorTotal": 100
+        },
+        {
+          "id": 2,
+          "descricao": "Formatação PC",
+          "quantidade": 2,
+          "tipoServico": "Mes",
+          "valorUnitario": 100,
+          "valorTotal": 200
+        },
+        {
+          "id": 3,
+          "descricao": "Formatação PC",
+          "quantidade": 1,
+          "tipoServico": "Hora",
+          "valorUnitario": 4,
+          "valorTotal": 100
+        }
+      ],
+      "statusServico": "orcamento",
+      "observacao": "anotação teste"
+    },
+    {
+      "id": 2,
+      "clienteId": 1,
+      "usuarioId": 1,
+      "itensOrdemServico": [
+        {
+          "id": 4,
+          "descricao": "teste HD SSD",
+          "quantidade": 5,
+          "tipoServico": "Dia",
+          "valorUnitario": 20,
+          "valorTotal": 100
+        }
+        
+      ],
+      "statusServico": "andamento",
+      "observacao": "anotação teste"
+    },
+    {
+      "id": 3,
+      "clienteId": 1,
+      "usuarioId": 1,
+      "itensOrdemServico": [
+        {
+          "id": 5,
+          "descricao": "teste HD SSD",
+          "quantidade": 5,
+          "tipoServico": "Dia",
+          "valorUnitario": 20,
+          "valorTotal": 100
+        }
+        
+      ],
+      "statusServico": "aprovado",
+      "observacao": "anotação teste"
+    },
+    {
+      "id": 4,
+      "clienteId": 1,
+      "usuarioId": 1,
+      "itensOrdemServico": [
+        {
+          "id": 6,
+          "descricao": "teste HD SSD",
+          "quantidade": 5,
+          "tipoServico": "Dia",
+          "valorUnitario": 20,
+          "valorTotal": 100
+        }
+        
+      ],
+      "statusServico": "cancelado",
+      "observacao": "anotação teste"
+    },
+    {
+      "id": 5,
+      "clienteId": 1,
+      "usuarioId": 1,
+      "itensOrdemServico": [
+        {
+          "id": 7,
+          "descricao": "teste HD SSD",
+          "quantidade": 5,
+          "tipoServico": "Dia",
+          "valorUnitario": 20,
+          "valorTotal": 100
+        }
+      ],
+      "statusServico": "finalizado",
+      "observacao": "anotação teste"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "admin",
+      "email": "admin@admin.com",
+      "telefones": [
+        {
+          "id": 1,
+          "DDD": 16,
+          "numero": 997322922
+        }
+      ],
+      "senha": "123",
+      "permissoes": [
+        "cadastrar_cliente"
+      ]
+    }
+  ]
+}
